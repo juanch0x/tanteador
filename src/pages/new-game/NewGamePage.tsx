@@ -1,4 +1,5 @@
 import { PageTitle } from "@/components/shared/PageTitle";
+import { PageTransition } from "@/components/shared/PageTransition";
 import { Field, FieldError, FieldGroup, FieldLabel, FieldSet } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Controller, useForm } from "react-hook-form";
@@ -39,6 +40,7 @@ export const NewGamePage = () => {
   };
 
   return (
+    <PageTransition>
     <div className="flex flex-col h-screen px-6 pt-16 pb-10">
       <PageTitle
         title="Nuevo partido"
@@ -99,5 +101,6 @@ export const NewGamePage = () => {
         </Button>
       </form>
     </div>
+    </PageTransition>
   );
 };
