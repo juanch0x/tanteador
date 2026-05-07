@@ -7,6 +7,7 @@ import {
 } from "@/store/store";
 import type { MatchSet, TeamId } from "@/types/BaseTypes";
 import { useNavigate } from "react-router";
+import { StartSetPanel } from "@/pages/game/components/StartSetPanel";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -33,6 +34,15 @@ export const GamePage = () => {
     return null;
   }
 
+  if (currentSet.initialServer === null) {
+    return (
+      <StartSetPanel
+        currentSetIndex={currentSet.index}
+        match={currentMatch}
+      />
+    );
+  }
+
   const isTie = currentSet.score.A === currentSet.score.B;
   const isEmptySet = currentSet.score.A === 0 && currentSet.score.B === 0;
   const hasCompletedSet = currentMatch.sets.some((s) => s.winner !== null);
@@ -56,11 +66,12 @@ export const GamePage = () => {
   const renderIncrementalButton = (teamId: TeamId) => {
     const score = currentSet.score[teamId];
     const name = currentMatch.teamNames[teamId];
+    const isServer = currentSet.initialServer === teamId;
     return (
       <div className="flex-1 justify-between items-center flex flex-col pt-4">
         <span className="block text-xl">{name}</span>
         <span className="block text-5xl">{score}</span>
-        <span className="block opacity-0">{name}</span>
+        <span className="block text-sm h-5">{isServer ? "★" : ""}</span>
       </div>
     );
   };
