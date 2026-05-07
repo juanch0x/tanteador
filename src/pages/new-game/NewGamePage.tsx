@@ -1,5 +1,6 @@
 import { PageTitle } from "@/components/shared/PageTitle";
 import { PageTransition } from "@/components/shared/PageTransition";
+import { Footer } from "@/components/shared/Footer";
 import { Field, FieldError, FieldGroup, FieldLabel, FieldSet } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Controller, useForm } from "react-hook-form";
@@ -99,6 +100,7 @@ export const NewGamePage = () => {
         <Button type="submit" size="lg" className="w-full h-14 text-base rounded-xl">
           Empezar partido
         </Button>
+        <Footer />
       </form>
     </div>
     </PageTransition>

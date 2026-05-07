@@ -2,6 +2,7 @@ import CurrentMatch from "./components/CurrentMatch";
 import NewMatch from "./components/NewMatch";
 import RecentMatches from "./components/RecentMatches";
 import { PageTransition } from "@/components/shared/PageTransition";
+import { Footer } from "@/components/shared/Footer";
 
 export const WelcomePage = () => {
   return (
@@ -14,6 +15,7 @@ export const WelcomePage = () => {
       <CurrentMatch />
       <NewMatch />
       <RecentMatches />
+      <Footer />
     </div>
     </PageTransition>
   );

@@ -4,6 +4,7 @@ import MatchHistoryCard from "@/components/shared/MatchHistoryCard";
 import { Accordion } from "@/components/ui/accordion";
 import { useNavigate } from "react-router";
 import { ArrowLeft } from "lucide-react";
+import { Footer } from "@/components/shared/Footer";
 
 export const HistoryPage = () => {
   const matchHistory = useMatchHistory();
@@ -43,6 +44,7 @@ export const HistoryPage = () => {
             ))}
           </Accordion>
         )}
+        <Footer />
       </div>
     </PageTransition>
   );
