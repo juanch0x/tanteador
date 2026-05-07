@@ -22,13 +22,15 @@ function AppRoutes() {
 
   return (
     <DirectionContext.Provider value={dirRef.current}>
-      <AnimatePresence mode="wait">
-        <Routes location={location} key={location.pathname}>
-          <Route path="/" element={<WelcomePage />} />
-          <Route path="/new" element={<NewGamePage />} />
-          <Route path="/game" element={<GamePage />} />
-        </Routes>
-      </AnimatePresence>
+      <div className="overflow-x-hidden">
+        <AnimatePresence mode="wait">
+          <Routes location={location} key={location.pathname}>
+            <Route path="/" element={<WelcomePage />} />
+            <Route path="/new" element={<NewGamePage />} />
+            <Route path="/game" element={<GamePage />} />
+          </Routes>
+        </AnimatePresence>
+      </div>
     </DirectionContext.Provider>
   );
 }
