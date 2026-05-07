@@ -13,6 +13,7 @@ type Store = {
   updateScore: (team: TeamId, mode: "increment" | "decrement") => void;
   closeSet: () => void;
   finishMatch: () => void;
+  resetAll: () => void;
 };
 
 export const useTanteadorStore = create<Store>()(
@@ -119,6 +120,11 @@ export const useTanteadorStore = create<Store>()(
         }));
       },
 
+      resetAll: () => {
+        set({ currentMatch: null, matchHistory: [] });
+        useTanteadorStore.persist.clearStorage();
+      },
+
       finishMatch: () => {
         const currentMatch = get().currentMatch;
         if (currentMatch == null) return;
@@ -179,3 +185,4 @@ export const useUpdateScore = () => useTanteadorStore((x) => x.updateScore);
 export const useCloseSet = () => useTanteadorStore((x) => x.closeSet);
 export const useFinishMatch = () => useTanteadorStore((x) => x.finishMatch);
 export const useMatchHistory = () => useTanteadorStore((x) => x.matchHistory);
+export const useResetAll = () => useTanteadorStore((x) => x.resetAll);
