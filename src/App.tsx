@@ -5,8 +5,14 @@ import { DirectionContext } from "@/components/shared/PageTransition";
 import { GamePage } from "./pages/game/GamePage";
 import { NewGamePage } from "./pages/new-game/NewGamePage";
 import { WelcomePage } from "./pages/welcome/WelcomePage";
+import { HistoryPage } from "./pages/history/HistoryPage";
 
-const routeOrder: Record<string, number> = { "/": 0, "/new": 1, "/game": 2 };
+const routeOrder: Record<string, number> = {
+  "/": 0,
+  "/new": 1,
+  "/history": 1,
+  "/game": 2,
+};
 
 function AppRoutes() {
   const location = useLocation();
@@ -27,6 +33,7 @@ function AppRoutes() {
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={<WelcomePage />} />
             <Route path="/new" element={<NewGamePage />} />
+            <Route path="/history" element={<HistoryPage />} />
             <Route path="/game" element={<GamePage />} />
           </Routes>
         </AnimatePresence>
