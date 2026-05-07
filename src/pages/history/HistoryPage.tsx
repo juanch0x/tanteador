@@ -16,7 +16,7 @@ export const HistoryPage = () => {
 
   return (
     <PageTransition>
-      <div className="min-h-screen flex flex-col px-6 pt-14 pb-10 gap-6">
+      <div className="min-h-dvh flex flex-col px-6 pt-14 pb-10 gap-6">
         <header>
           <button
             onClick={() => navigate(-1)}

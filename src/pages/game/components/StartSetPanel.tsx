@@ -129,7 +129,7 @@ export const StartSetPanel = ({ currentSetIndex, match }: Props) => {
 
   return (
     <>
-      <div className="flex flex-col h-screen px-6 pt-16 pb-10">
+      <div className="flex flex-col h-dvh px-6 pt-16 pb-10">
         <div className="flex flex-col items-center gap-1">
           <span className="text-xs font-semibold tracking-widest uppercase text-muted-foreground">
             Set

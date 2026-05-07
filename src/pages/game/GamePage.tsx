@@ -91,7 +91,7 @@ export const GamePage = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={fadeTransition}
-            className="h-screen flex flex-col"
+            className="h-dvh flex flex-col"
           >
             <div className="grid grid-cols-2 flex-1">
               {(["A", "B"] as TeamId[]).map((teamId) => {

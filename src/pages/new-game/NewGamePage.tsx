@@ -42,7 +42,7 @@ export const NewGamePage = () => {
 
   return (
     <PageTransition>
-    <div className="flex flex-col h-screen px-6 pt-16 pb-10">
+    <div className="flex flex-col h-dvh px-6 pt-16 pb-10">
       <PageTitle
         title="Nuevo partido"
         subtitle="Opcional — los nombres ayudan a que el historial sea más útil."
