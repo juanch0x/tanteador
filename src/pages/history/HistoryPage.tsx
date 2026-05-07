@@ -19,7 +19,7 @@ export const HistoryPage = () => {
         <header>
           <button
             onClick={() => navigate(-1)}
-            className="flex items-center gap-1.5 text-muted-foreground hover:text-foreground transition-colors mb-4 -ml-1"
+            className="flex items-center gap-1.5 text-muted-foreground hover:text-foreground transition-colors cursor-pointer mb-4 -ml-1"
           >
             <ArrowLeft className="size-4" />
             <span className="text-sm">Volver</span>
