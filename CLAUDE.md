@@ -47,6 +47,11 @@ Entry point: `src/main.tsx` → `src/App.tsx` → page components.
 
 **Path alias:** `@/` resolves to `src/` (configured in `tsconfig.app.json` and `vite.config.ts`).
 
+## Design System
+
+See [`DESIGN.md`](./DESIGN.md) for the full design reference — tokens, typography, layout
+patterns, component patterns, and animation system. Read it before making any UI changes.
+
 ## Code Style
 
 ESLint uses flat config (`eslint.config.js`) with `typescript-eslint`, `react-hooks`, `react-refresh`, and `prettier` plugins. Prettier is installed with defaults (no `.prettierrc`).
