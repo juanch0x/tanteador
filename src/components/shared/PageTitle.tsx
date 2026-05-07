@@ -4,9 +4,9 @@ type Props = {
 };
 export const PageTitle = ({ title, subtitle }: Props) => {
   return (
-    <div className="flex flex-col gap-1.5">
-      <h2 className="text-2xl font-semibold">{title}</h2>
-      {subtitle && <h4 className="text-lg">{subtitle}</h4>}
+    <div className="flex flex-col gap-2">
+      <h2 className="text-3xl font-bold">{title}</h2>
+      {subtitle && <p className="text-sm text-muted-foreground">{subtitle}</p>}
     </div>
   );
 };

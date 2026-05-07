@@ -62,14 +62,19 @@ const MatchHistoryCard = ({ match, value }: Props) => {
     .sort((a, b) => a.index - b.index);
 
   const teamClass = (teamId: TeamId) =>
-    `text-sm ${winner === teamId ? "font-bold" : "text-gray-600"}`;
+    winner === teamId
+      ? "text-sm font-bold text-foreground"
+      : "text-sm text-muted-foreground";
+
   const scoreClass = (teamId: TeamId) =>
-    `tabular-nums text-right ${winner === teamId ? "font-bold" : "text-gray-600"}`;
+    winner === teamId
+      ? "tabular-nums text-right font-bold text-foreground"
+      : "tabular-nums text-right text-muted-foreground";
 
   return (
     <AccordionItem
       value={value}
-      className="bg-white rounded shadow-sm border-none px-3 py-2"
+      className="bg-card border border-border rounded-xl px-4 py-3"
     >
       <AccordionTrigger className="p-0 hover:no-underline items-start gap-2">
         <div className="flex-1 min-w-0">
@@ -80,7 +85,7 @@ const MatchHistoryCard = ({ match, value }: Props) => {
             <span className={scoreClass("B")}>{setsB}</span>
           </div>
           {relativeTime && (
-            <p className="text-xs text-gray-400 text-right pt-1">
+            <p className="text-xs text-muted-foreground/60 text-right pt-1">
               {relativeTime}
             </p>
           )}
@@ -88,19 +93,29 @@ const MatchHistoryCard = ({ match, value }: Props) => {
       </AccordionTrigger>
 
       <AccordionContent className="pt-3 pb-0">
-        <div className="border-t border-gray-100 pt-2 mb-3 space-y-1">
+        <div className="border-t border-border pt-3 mb-3 space-y-1.5">
           {closedSets.map((s, i) => (
             <div
               key={s.index}
               className="grid grid-cols-[auto_1fr_auto_auto_auto] items-center gap-x-2 text-sm"
             >
-              <span className="text-gray-400 text-xs w-10">Set {i + 1}</span>
+              <span className="text-muted-foreground text-xs w-10">
+                Set {i + 1}
+              </span>
               <span />
-              <span className={s.winner === "A" ? "font-bold" : "text-gray-600"}>
+              <span
+                className={
+                  s.winner === "A" ? "font-bold text-foreground" : "text-muted-foreground"
+                }
+              >
                 {s.score.A}
               </span>
-              <span className="text-gray-400">–</span>
-              <span className={s.winner === "B" ? "font-bold" : "text-gray-600"}>
+              <span className="text-muted-foreground">–</span>
+              <span
+                className={
+                  s.winner === "B" ? "font-bold text-foreground" : "text-muted-foreground"
+                }
+              >
                 {s.score.B}
               </span>
             </div>

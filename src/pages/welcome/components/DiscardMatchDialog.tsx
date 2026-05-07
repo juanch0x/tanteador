@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { useDiscardCurrentMatch } from "@/store/store";
+import { Trash2 } from "lucide-react";
 
 const DiscardMatchDialog = () => {
   const discard = useDiscardCurrentMatch();
@@ -18,7 +19,9 @@ const DiscardMatchDialog = () => {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button variant="destructive">Descartar</Button>
+        <Button variant="destructive" size="icon-lg">
+          <Trash2 />
+        </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>

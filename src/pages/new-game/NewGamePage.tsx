@@ -1,11 +1,5 @@
 import { PageTitle } from "@/components/shared/PageTitle";
-import {
-  Field,
-  FieldError,
-  FieldGroup,
-  FieldLabel,
-  FieldSet,
-} from "@/components/ui/field";
+import { Field, FieldError, FieldGroup, FieldLabel, FieldSet } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
@@ -45,14 +39,15 @@ export const NewGamePage = () => {
   };
 
   return (
-    <div className="px-2">
+    <div className="flex flex-col h-screen px-6 pt-16 pb-10">
       <PageTitle
-        title="Nuevo juego!"
-        subtitle="Si es posible, añada los nombres de los jugadores con el fin de que los datos históricos posteriores sean mas útiles"
+        title="Nuevo partido"
+        subtitle="Opcional — los nombres ayudan a que el historial sea más útil."
       />
+
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col pt-5 gap-5"
+        className="flex flex-col flex-1 pt-10 gap-6"
       >
         <FieldSet>
           <FieldGroup>
@@ -61,7 +56,7 @@ export const NewGamePage = () => {
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel htmlFor="team_a">Equipo B</FieldLabel>
+                  <FieldLabel htmlFor="team_a">Equipo A</FieldLabel>
                   <Input
                     {...field}
                     id="team_a"
@@ -96,7 +91,12 @@ export const NewGamePage = () => {
             />
           </FieldGroup>
         </FieldSet>
-        <Button type="submit">Empezar!</Button>
+
+        <div className="flex-1" />
+
+        <Button type="submit" size="lg" className="w-full h-14 text-base rounded-xl">
+          Empezar partido
+        </Button>
       </form>
     </div>
   );

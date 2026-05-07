@@ -20,7 +20,9 @@ type Props = {
 
 export const StartSetPanel = ({ currentSetIndex, match }: Props) => {
   const startSet = useStartSet();
-  const completedSets = match.sets.filter((s) => s.winner !== null);
+  const completedSets = match.sets
+    .filter((s) => s.winner !== null)
+    .sort((a, b) => a.index - b.index);
   const defaultOption = computeDefaultServeOption(completedSets);
   const [selected, setSelected] = useState<ServeOption>(defaultOption);
 
@@ -41,54 +43,72 @@ export const StartSetPanel = ({ currentSetIndex, match }: Props) => {
   ];
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen gap-8 px-6">
-      <h2 className="text-2xl font-semibold">Set {currentSetIndex + 1}</h2>
+    <div className="flex flex-col h-screen px-6 pt-16 pb-10">
+      <div className="flex flex-col items-center gap-1">
+        <span className="text-xs font-semibold tracking-widest uppercase text-muted-foreground">
+          Set
+        </span>
+        <span className="text-9xl font-bold tabular-nums leading-none">
+          {currentSetIndex + 1}
+        </span>
+      </div>
 
       {completedSets.length > 0 && (
-        <table className="text-sm text-center border-collapse w-full max-w-xs">
-          <thead>
-            <tr>
-              <th className="text-left pb-2 pr-4" />
-              {completedSets
-                .sort((a, b) => a.index - b.index)
-                .map((s) => (
-                  <th key={s.index} className="pb-2 px-2 font-medium">
-                    Set {s.index + 1}
+        <div className="mt-10 bg-card border border-border rounded-xl p-4">
+          <table className="w-full text-center">
+            <thead>
+              <tr>
+                <th className="text-left pb-3" />
+                {completedSets.map((s) => (
+                  <th
+                    key={s.index}
+                    className="pb-3 px-3 text-xs font-semibold tracking-wide text-muted-foreground uppercase"
+                  >
+                    S{s.index + 1}
                   </th>
                 ))}
-            </tr>
-          </thead>
-          <tbody>
-            {(["A", "B"] as TeamId[]).map((teamId) => (
-              <tr key={teamId}>
-                <td className="text-left pr-4 py-1 font-medium truncate max-w-[120px]">
-                  {match.teamNames[teamId]}
-                </td>
-                {completedSets
-                  .sort((a, b) => a.index - b.index)
-                  .map((s) => (
-                    <td key={s.index} className="px-2 py-1">
+              </tr>
+            </thead>
+            <tbody>
+              {(["A", "B"] as TeamId[]).map((teamId) => (
+                <tr key={teamId}>
+                  <td className="text-left py-1.5 text-sm font-semibold text-foreground pr-4 max-w-[130px] truncate">
+                    {match.teamNames[teamId]}
+                  </td>
+                  {completedSets.map((s) => (
+                    <td
+                      key={s.index}
+                      className={[
+                        "px-3 py-1.5 text-base font-mono",
+                        s.winner === teamId
+                          ? "text-foreground font-bold"
+                          : "text-muted-foreground",
+                      ].join(" ")}
+                    >
                       {s.score[teamId]}
                     </td>
                   ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
 
-      <div className="flex flex-col items-center gap-4 w-full max-w-xs">
-        <span className="text-base font-medium">¿Quién saca primero?</span>
-        <div className="flex w-full rounded-lg overflow-hidden border border-border">
+      <div className="flex-1 flex flex-col items-center justify-center gap-4 w-full">
+        <span className="text-sm font-medium text-muted-foreground">
+          ¿Quién saca primero?
+        </span>
+        <div className="flex w-full rounded-xl overflow-hidden border border-border gap-px bg-border">
           {options.map(({ value, label }) => (
             <button
               key={value}
               onClick={() => setSelected(value)}
               className={[
-                "flex-1 py-3 text-sm font-medium transition-colors",
+                "flex-1 py-5 px-2 text-sm font-semibold transition-colors leading-tight",
                 selected === value
                   ? "bg-primary text-primary-foreground"
-                  : "bg-background text-foreground hover:bg-muted",
+                  : "bg-card text-muted-foreground",
               ].join(" ")}
             >
               {label}
@@ -97,7 +117,11 @@ export const StartSetPanel = ({ currentSetIndex, match }: Props) => {
         </div>
       </div>
 
-      <Button size="lg" onClick={handleStart}>
+      <Button
+        size="lg"
+        className="w-full h-14 text-base rounded-xl"
+        onClick={handleStart}
+      >
         Iniciar Set
       </Button>
     </div>

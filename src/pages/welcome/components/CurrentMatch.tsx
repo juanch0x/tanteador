@@ -6,48 +6,46 @@ import { useNavigate } from "react-router";
 const CurrentMatch = () => {
   const currentMatch = useCurrentMatch();
   const navigate = useNavigate();
-  if (currentMatch == null) {
-    return null;
-  }
+
+  if (currentMatch == null) return null;
 
   const currentSet = currentMatch.sets.at(-1);
 
-  const renderTeam = (name: string) => {
-    return (
-      <div className="text-center">
-        <span className="block text-lg font-medium">{name}</span>
-      </div>
-    );
-  };
-
-  const renderScore = (score: number | undefined) => {
-    return (
-      <div className="text-center">
-        <span className="block text-xl font-semibold">{score || 0}</span>
-      </div>
-    );
-  };
-
-  const handleContinueClick = () => {
-    navigate("/game");
-  };
-
   return (
-    <div className="p-2">
-      <div className="bg-gray-300 px-3 py-2 rounded">
-        <h2>Partido en curso</h2>
-        <hr className="border-gray-400 m-2" />
-        <div className="grid grid-cols-[1fr_1px_1fr] gap-1">
-          {renderTeam(currentMatch.teamNames.A)}
-          <div className="w-px bg-gray-400 row-span-2" />
-          {renderTeam(currentMatch.teamNames.B)}
-          {renderScore(currentSet?.score?.A)}
-          {renderScore(currentSet?.score?.B)}
+    <div className="bg-card border border-border rounded-xl p-4">
+      <p className="text-xs font-semibold tracking-widest uppercase text-muted-foreground mb-4">
+        Partido en curso
+      </p>
+
+      <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-4 mb-5">
+        <div className="text-center min-w-0">
+          <p className="text-xs text-muted-foreground truncate mb-1">
+            {currentMatch.teamNames.A}
+          </p>
+          <p className="text-4xl font-bold tabular-nums">
+            {currentSet?.score?.A ?? 0}
+          </p>
         </div>
-        <div className="flex justify-center items-center pt-5 gap-3">
-          <Button onClick={handleContinueClick}>Continuar</Button>
-          <DiscardMatchDialog />
+        <span className="text-muted-foreground text-xl font-light">–</span>
+        <div className="text-center min-w-0">
+          <p className="text-xs text-muted-foreground truncate mb-1">
+            {currentMatch.teamNames.B}
+          </p>
+          <p className="text-4xl font-bold tabular-nums">
+            {currentSet?.score?.B ?? 0}
+          </p>
         </div>
+      </div>
+
+      <div className="flex gap-2">
+        <Button
+          size="lg"
+          className="flex-1 rounded-lg"
+          onClick={() => navigate("/game")}
+        >
+          Continuar
+        </Button>
+        <DiscardMatchDialog />
       </div>
     </div>
   );

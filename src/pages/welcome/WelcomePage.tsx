@@ -4,9 +4,10 @@ import RecentMatches from "./components/RecentMatches";
 
 export const WelcomePage = () => {
   return (
-    <div className="h-screen">
-      <header className="py-5 px-2">
-        <h1 className="text-2xl">Tanteador Pelota Paleta</h1>
+    <div className="min-h-screen flex flex-col px-6 pt-14 pb-10 gap-6">
+      <header>
+        <h1 className="text-3xl font-bold">Tanteador</h1>
+        <p className="text-sm text-muted-foreground mt-1">Pelota Paleta</p>
       </header>
       <CurrentMatch />
       <NewMatch />

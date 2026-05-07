@@ -14,20 +14,19 @@ const RecentMatches = () => {
     .slice(0, MAX_RECENT);
 
   return (
-    <div className="p-2">
-      <div className="bg-gray-300 px-3 py-2 rounded">
-        <h2>Últimos partidos</h2>
-        <hr className="border-gray-400 m-2" />
-        <Accordion type="single" collapsible className="flex flex-col gap-2">
-          {recent.map((match, idx) => (
-            <MatchHistoryCard
-              key={`${match.finishedAt ?? "unknown"}-${idx}`}
-              match={match}
-              value={`match-${idx}`}
-            />
-          ))}
-        </Accordion>
-      </div>
+    <div className="flex flex-col gap-3">
+      <p className="text-xs font-semibold tracking-widest uppercase text-muted-foreground">
+        Últimos partidos
+      </p>
+      <Accordion type="single" collapsible className="flex flex-col gap-2">
+        {recent.map((match, idx) => (
+          <MatchHistoryCard
+            key={`${match.finishedAt ?? "unknown"}-${idx}`}
+            match={match}
+            value={`match-${idx}`}
+          />
+        ))}
+      </Accordion>
     </div>
   );
 };
