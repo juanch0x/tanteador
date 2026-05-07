@@ -15,7 +15,7 @@ export const WelcomePage = () => {
       <CurrentMatch />
       <NewMatch />
       <RecentMatches />
-      <Footer />
+      <Footer className="mt-auto" />
     </div>
     </PageTransition>
   );

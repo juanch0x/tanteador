@@ -44,7 +44,7 @@ export const HistoryPage = () => {
             ))}
           </Accordion>
         )}
-        <Footer />
+        <Footer className="mt-auto" />
       </div>
     </PageTransition>
   );
