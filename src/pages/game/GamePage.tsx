@@ -23,6 +23,9 @@ import { Button } from "@/components/ui/button";
 import { CircleDot } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { PageTransition } from "@/components/shared/PageTransition";
+import { useWakeLock } from "@/pages/game/hooks/useWakeLock";
+import { usePreventUnload } from "@/pages/game/hooks/usePreventUnload";
+import { useNavigationBlocker } from "@/pages/game/hooks/useNavigationBlocker";
 
 const teamStyle = {
   A: {
@@ -47,6 +50,12 @@ export const GamePage = () => {
   const finishMatch = useFinishMatch();
   const navigate = useNavigate();
 
+  const isActive = currentSet != null;
+
+  useWakeLock(isActive);
+  usePreventUnload(isActive);
+  const blocker = useNavigationBlocker(isActive);
+
   if (currentSet == null) {
     navigate("/");
     return null;
@@ -70,6 +79,27 @@ export const GamePage = () => {
 
   return (
     <PageTransition>
+      {/* Dialog del navigation blocker */}
+      <AlertDialog open={blocker.state === "blocked"}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>¿Salir del partido?</AlertDialogTitle>
+            <AlertDialogDescription>
+              Hay un partido en curso. Si salís ahora, el puntaje se va a
+              conservar pero perdés el hilo del juego.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel onClick={() => blocker.reset?.()}>
+              Quedarme
+            </AlertDialogCancel>
+            <AlertDialogAction onClick={() => blocker.proceed?.()}>
+              Salir igual
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
       <AnimatePresence mode="wait">
         {isStartingSet ? (
           <motion.div
