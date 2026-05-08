@@ -26,6 +26,7 @@ import { PageTransition } from "@/components/shared/PageTransition";
 import { useWakeLock } from "@/pages/game/hooks/useWakeLock";
 import { usePreventUnload } from "@/pages/game/hooks/usePreventUnload";
 import { useNavigationBlocker } from "@/pages/game/hooks/useNavigationBlocker";
+import { useEffect, useState } from "react";
 
 const teamStyle = {
   A: {
@@ -52,9 +53,14 @@ export const GamePage = () => {
 
   const isActive = currentSet != null;
 
+  // Esperar a que el componente esté montado antes de activar el blocker
+  // para evitar que capture la transición de navegación de entrada
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
+
   useWakeLock(isActive);
   usePreventUnload(isActive);
-  const blocker = useNavigationBlocker(isActive);
+  const blocker = useNavigationBlocker(isActive && mounted);
 
   if (currentSet == null) {
     navigate("/");
@@ -80,7 +86,10 @@ export const GamePage = () => {
   return (
     <PageTransition>
       {/* Dialog del navigation blocker */}
-      <AlertDialog open={blocker.state === "blocked"}>
+      <AlertDialog
+        open={blocker.state === "blocked"}
+        onOpenChange={(open) => { if (!open) blocker.reset?.(); }}
+      >
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>¿Salir del partido?</AlertDialogTitle>
